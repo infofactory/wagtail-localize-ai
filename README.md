@@ -108,5 +108,5 @@ This project is released under the [BSD license](LICENSE).
 ## Contributors
 
 <a href="https://github.com/infofactory/wagtail-localize-ai/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=infofactory/wagtail-localize-ai" width="100%"/>
+  <img src="https://contrib.rocks/image?repo=infofactory/wagtail-localize-ai" />
 </a>
