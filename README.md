@@ -8,7 +8,7 @@ A machine translator for Wagtail Localize that uses LiteLLM for translation
 
 ## Dependencies
 - [Wagtail Localize](https://github.com/wagtail/wagtail-localize)
-- [litellm](https://github.com/litellm/litellm)
+- [litellm](https://github.com/BerriAI/litellm)
 
 ## Installation
 Install the package using pip:
