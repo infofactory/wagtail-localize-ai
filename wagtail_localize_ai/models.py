@@ -9,7 +9,7 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel
 User = get_user_model()
 
 class TranslationLog(models.Model):
-    timestamp = models.DateTimeField(default=timezone.now, editable=False, verbose_name=_("Date"))
+    timestamp = models.DateTimeField(default=timezone.now, editable=False, verbose_name=_("Created"))
     provider = models.CharField(max_length=512, verbose_name=_("Provider"))
     model = models.CharField(max_length=512, verbose_name=_("Model"))
 
@@ -18,6 +18,10 @@ class TranslationLog(models.Model):
 
     error = models.TextField(null=True, blank=True, verbose_name=_("Error"))
 
+    @property
+    def status(self):
+        return not bool(self.error)
+
     def __str__(self):
         return f"{self.timestamp.strftime('%Y-%m-%d %H:%M:%S')} - {self.provider} - {self.model}"
 
@@ -25,7 +29,7 @@ class TranslationLog(models.Model):
         verbose_name = _("AI Translation Log")
         verbose_name_plural = _("AI Translation Logs")
 
-@register_setting
+@register_setting(icon='site')
 class AITranslatorSettings(BaseGenericSetting):
     PROVIDER_CHOICES = (
         (provider_name, provider.get("_name", provider_name)) for provider_name, provider in settings.AI_PROVIDERS.items()

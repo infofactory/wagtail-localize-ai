@@ -18,10 +18,11 @@ pip install wagtail-localize-ai
 ```
 In your `settings.py` file,
 - Add `wagtail_localize_ai` to your `INSTALLED_APPS`
+- Add `wagtail.contrib.settings` to your `INSTALLED_APPS` (used to setup model and prompt)
 - Setup `WAGTAILLOCALIZE_MACHINE_TRANSLATOR` like this:
     ```python
     WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
-        "CLASS": "wagtail_localize_ai.translators.AITranslator",
+        "CLASS": "wagtail_localize_ai.translator.AITranslator",
     }
     ```
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-07 14:15+0100\n"
+"POT-Creation-Date: 2025-03-07 15:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,43 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: wagtail_localize_ai/models.py:12
-msgid "Date"
-msgstr "Data"
 
-#: wagtail_localize_ai/models.py:13 wagtail_localize_ai/models.py:33
+#: models.py:12
+msgid "Created"
+msgstr "Creato"
+
+#: models.py:13 models.py:37
 msgid "Provider"
 msgstr "Provider"
 
-#: wagtail_localize_ai/models.py:14 wagtail_localize_ai/models.py:34
+#: models.py:14 models.py:38
 msgid "Model"
 msgstr "Modello"
 
-#: wagtail_localize_ai/models.py:16
+#: models.py:16
 msgid "Input Tokens"
 msgstr "Token di input"
 
-#: wagtail_localize_ai/models.py:17
+#: models.py:17
 msgid "Output Tokens"
 msgstr "Token di output"
 
-#: wagtail_localize_ai/models.py:19
+#: models.py:19
 msgid "Error"
 msgstr "Errore"
 
-#: wagtail_localize_ai/models.py:25
+#: models.py:29
 msgid "AI Translation Log"
 msgstr "AI Translation - Utilizzo"
 
-#: wagtail_localize_ai/models.py:26 wagtail_localize_ai/views.py:28
+#: models.py:30 views.py:29
 msgid "AI Translation Logs"
 msgstr "AI Translation - Storico utilizzo"
 
-#: wagtail_localize_ai/models.py:36
+#: models.py:40
 msgid "Prompt"
 msgstr "Prompt"
 
-#: wagtail_localize_ai/models.py:36
+#: models.py:40
 #, python-brace-format
 msgid ""
 "Prompt to use for translation. You can {language} and {text} as placeholders "
@@ -62,19 +63,18 @@ msgstr ""
 "Il prompt da usare per la traduzione. Puoi usare {language} e {text} come "
 "placeholder per la lingua di destinazione e il testo da tradurre."
 
-#: wagtail_localize_ai/models.py:47 wagtail_localize_ai/models.py:48
-#: wagtail_localize_ai/translator.py:15
+#: models.py:51 models.py:52 translator.py:15
 msgid "AI Translator"
 msgstr "Traduttore AI"
 
-#: wagtail_localize_ai/translator.py:73
+#: translator.py:73
 msgid "No prompt configured"
 msgstr "Nessun prompt configurato"
 
-#: wagtail_localize_ai/translator.py:81
+#: translator.py:81
 msgid "No provider or model configured"
 msgstr "Nessun provider o modello configurato"
 
-#: wagtail_localize_ai/translator.py:119
+#: translator.py:119
 msgid "Translation failed"
 msgstr "Errore durante la traduzione"

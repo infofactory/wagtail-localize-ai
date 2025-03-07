@@ -38,3 +38,5 @@ wheels/
 venv/
 ENV/
 
+# Database
+db.sqlite3

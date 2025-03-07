@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-07 14:15+0100\n"
+"POT-Creation-Date: 2025-03-07 15:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,62 +17,62 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: wagtail_localize_ai/models.py:12
-msgid "Date"
+
+#: models.py:12
+msgid "Created"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:13 wagtail_localize_ai/models.py:33
+#: models.py:13 models.py:37
 msgid "Provider"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:14 wagtail_localize_ai/models.py:34
+#: models.py:14 models.py:38
 msgid "Model"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:16
+#: models.py:16
 msgid "Input Tokens"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:17
+#: models.py:17
 msgid "Output Tokens"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:19
+#: models.py:19
 msgid "Error"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:25
+#: models.py:29
 msgid "AI Translation Log"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:26 wagtail_localize_ai/views.py:28
+#: models.py:30 views.py:29
 msgid "AI Translation Logs"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:36
+#: models.py:40
 msgid "Prompt"
 msgstr ""
 
-#: wagtail_localize_ai/models.py:36
+#: models.py:40
 #, python-brace-format
 msgid ""
 "Prompt to use for translation. You can {language} and {text} as placeholders "
 "for the target language and the text to translate."
 msgstr ""
 
-#: wagtail_localize_ai/models.py:47 wagtail_localize_ai/models.py:48
-#: wagtail_localize_ai/translator.py:15
+#: models.py:51 models.py:52 translator.py:15
 msgid "AI Translator"
 msgstr ""
 
-#: wagtail_localize_ai/translator.py:73
+#: translator.py:73
 msgid "No prompt configured"
 msgstr ""
 
-#: wagtail_localize_ai/translator.py:81
+#: translator.py:81
 msgid "No provider or model configured"
 msgstr ""
 
-#: wagtail_localize_ai/translator.py:119
+#: translator.py:119
 msgid "Translation failed"
 msgstr ""
