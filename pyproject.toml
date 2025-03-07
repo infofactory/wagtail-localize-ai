@@ -1,0 +1,21 @@
+[project]
+name = "wagtail-localize-ai"
+version = "0.1.0"
+description = "LiteLLM powered machine translator for wagtail-localize"
+authors = [
+    { name="Alessio Tognan", email="tognan@infofactory.it" },
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "litellm>=1.63.2,<2.0.0",
+    "wagtail-localize",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+"*" = ["*.po", "*.mo"]
+
