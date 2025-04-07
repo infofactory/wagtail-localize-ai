@@ -40,5 +40,3 @@ class AiTranslationLogViewSet(ModelViewSet):
     inspect_view_class = AiTranslationLogInspectView
 
     form_fields = []
-
-    permission_policy = None

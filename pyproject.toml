@@ -1,6 +1,6 @@
 [project]
 name = "wagtail-localize-ai"
-version = "0.1.2"
+version = "0.1.3"
 description = "LiteLLM powered machine translator for wagtail-localize"
 authors = [
     { name="Alessio Tognan", email="tognan@infofactory.it" },
