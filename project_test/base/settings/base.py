@@ -12,9 +12,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import environ
+
+env = environ.Env()
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -205,6 +210,6 @@ WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
 AI_PROVIDERS = {
     'openai': {
         '_name': 'OpenAI',
-        'api_key': os.environ.get('OPENAI_API_KEY'),
+        'api_key': env('OPENAI_API_KEY'),
     },
 }

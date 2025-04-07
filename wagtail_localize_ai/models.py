@@ -29,12 +29,14 @@ class TranslationLog(models.Model):
         verbose_name = _("AI Translation Log")
         verbose_name_plural = _("AI Translation Logs")
 
-@register_setting(icon='site')
-class AITranslatorSettings(BaseGenericSetting):
-    PROVIDER_CHOICES = (
+def get_providers():
+    return (
         (provider_name, provider.get("_name", provider_name)) for provider_name, provider in settings.AI_PROVIDERS.items()
     )
-    provider = models.CharField(max_length=512, verbose_name=_("Provider"), choices=PROVIDER_CHOICES)
+
+@register_setting(icon='site')
+class AITranslatorSettings(BaseGenericSetting):
+    provider = models.CharField(max_length=512, verbose_name=_("Provider"), choices=get_providers)
     model = models.CharField(max_length=512, verbose_name=_("Model"))
 
     prompt = models.TextField(verbose_name=_("Prompt"), help_text=_(r"Prompt to use for translation. You can {language} and {text} as placeholders for the target language and the text to translate."))

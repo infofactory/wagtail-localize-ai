@@ -1,6 +1,6 @@
 [project]
 name = "wagtail-localize-ai"
-version = "0.1.1"
+version = "0.1.2"
 description = "LiteLLM powered machine translator for wagtail-localize"
 authors = [
     { name="Alessio Tognan", email="tognan@infofactory.it" },
@@ -22,4 +22,9 @@ package-dir = {"" = "."}
 
 [tool.setuptools.package-data]
 "wagtail_localize_ai" = ["locale/**/*.po", "locale/**/*.mo"]
+
+[dependency-groups]
+dev = [
+    "django-environ>=0.12.0",
+]
 
