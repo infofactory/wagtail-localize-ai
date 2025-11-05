@@ -1,12 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.admin.panels import FieldPanel, FieldRowPanel
 
-User = get_user_model()
 
 class TranslationLog(models.Model):
     timestamp = models.DateTimeField(default=timezone.now, editable=False, verbose_name=_("Created"))
@@ -31,7 +29,8 @@ class TranslationLog(models.Model):
 
 def get_providers():
     return (
-        (provider_name, provider.get("_name", provider_name)) for provider_name, provider in settings.AI_PROVIDERS.items()
+        (provider_name, provider.get("_name", provider_name))
+        for provider_name, provider in settings.AI_PROVIDERS.items()
     )
 
 @register_setting(icon='site')
@@ -39,7 +38,12 @@ class AITranslatorSettings(BaseGenericSetting):
     provider = models.CharField(max_length=512, verbose_name=_("Provider"), choices=get_providers)
     model = models.CharField(max_length=512, verbose_name=_("Model"))
 
-    prompt = models.TextField(verbose_name=_("Prompt"), help_text=_(r"Prompt to use for translation. You can {language} and {text} as placeholders for the target language and the text to translate."))
+    prompt = models.TextField(
+        default="",
+        blank=True,
+        verbose_name=_("Style prompt"),
+        help_text=_("Give instructions to the AI about the style, how to translate certain things or other informations about the website you're translating."),
+    )
 
     panels = [
         FieldRowPanel([

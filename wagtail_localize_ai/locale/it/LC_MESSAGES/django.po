@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-07 15:57+0000\n"
+"POT-Creation-Date: 2025-11-05 09:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,63 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:12
+#: wagtail_localize_ai/models.py:10
 msgid "Created"
 msgstr "Creato"
 
-#: models.py:13 models.py:37
+#: wagtail_localize_ai/models.py:11 wagtail_localize_ai/models.py:38
 msgid "Provider"
 msgstr "Provider"
 
-#: models.py:14 models.py:38
+#: wagtail_localize_ai/models.py:12 wagtail_localize_ai/models.py:39
 msgid "Model"
 msgstr "Modello"
 
-#: models.py:16
+#: wagtail_localize_ai/models.py:14
 msgid "Input Tokens"
 msgstr "Token di input"
 
-#: models.py:17
+#: wagtail_localize_ai/models.py:15
 msgid "Output Tokens"
 msgstr "Token di output"
 
-#: models.py:19
+#: wagtail_localize_ai/models.py:17
 msgid "Error"
 msgstr "Errore"
 
-#: models.py:29
+#: wagtail_localize_ai/models.py:27
 msgid "AI Translation Log"
 msgstr "AI Translation - Utilizzo"
 
-#: models.py:30 views.py:29
+#: wagtail_localize_ai/models.py:28 wagtail_localize_ai/views.py:29
 msgid "AI Translation Logs"
 msgstr "AI Translation - Storico utilizzo"
 
-#: models.py:40
-msgid "Prompt"
-msgstr "Prompt"
+#: wagtail_localize_ai/models.py:41
+msgid "Style prompt"
+msgstr "Prompt per lo stile"
 
-#: models.py:40
-#, python-brace-format
+#: wagtail_localize_ai/models.py:41
 msgid ""
-"Prompt to use for translation. You can {language} and {text} as placeholders "
-"for the target language and the text to translate."
+"Give instructions to the AI about the style, how to translate certain things "
+"or other informations about the website you're translating."
 msgstr ""
-"Il prompt da usare per la traduzione. Puoi usare {language} e {text} come "
-"placeholder per la lingua di destinazione e il testo da tradurre."
+"Dai istruzioni all'AI riguardo lo stile, come tradurre certe parole o "
+"altre informazioni riguardo il sito web che stai traducendo."
 
-#: models.py:51 models.py:52 translator.py:15
+#: wagtail_localize_ai/models.py:52 wagtail_localize_ai/models.py:53
+#: wagtail_localize_ai/translator.py:15
 msgid "AI Translator"
 msgstr "Traduttore AI"
 
-#: translator.py:73
-msgid "No prompt configured"
-msgstr "Nessun prompt configurato"
-
-#: translator.py:81
+#: wagtail_localize_ai/translator.py:78
 msgid "No provider or model configured"
 msgstr "Nessun provider o modello configurato"
 
-#: translator.py:119
+#: wagtail_localize_ai/translator.py:134
 msgid "Translation failed"
 msgstr "Errore durante la traduzione"

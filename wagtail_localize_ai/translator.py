@@ -15,6 +15,9 @@ class AITranslator(BaseMachineTranslator):
     display_name = _("AI Translator")
 
     def translate(self, source_locale: Locale, target_locale: Locale, strings: List[StringValue]) -> List[StringValue]:
+        source_language = get_language_info(source_locale.language_code)[
+            "name"
+        ]
         target_language = get_language_info(target_locale.language_code)[
             "name"
         ]
@@ -31,7 +34,7 @@ class AITranslator(BaseMachineTranslator):
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
             executor_results = list(
-                executor.map(translate_text, strings, [target_language] * len(strings))
+                executor.map(translate_text, strings, [source_language] * len(strings), [target_language] * len(strings))
             )
         
         results = {}
@@ -56,23 +59,12 @@ class AITranslator(BaseMachineTranslator):
             return False
         has_provider = translator_settings.provider
         has_model = translator_settings.model
-        has_prompt = translator_settings.prompt
-        if not has_prompt:
-            return False
-        prompt_has_language = r"{language}" in translator_settings.prompt
-        prompt_has_text = r"{text}" in translator_settings.prompt
         not_same_language = source_locale.language_code != target_locale.language_code
 
-        return has_provider and has_model and has_prompt and prompt_has_language and prompt_has_text and not_same_language
+        return has_provider and has_model and not_same_language
 
-def translate_text(text: StringValue, target_language: str):
+def translate_text(text: StringValue, source_language: str, target_language: str):
     translator_settings = AITranslatorSettings.load()
-    prompt = translator_settings.prompt
-    if not prompt:
-        return {
-            "error": _("No prompt configured"),
-        }
-    prompt = prompt.format(text=text.get_translatable_html(), language=target_language)
 
     provider = translator_settings.provider
     model = translator_settings.model
@@ -80,13 +72,31 @@ def translate_text(text: StringValue, target_language: str):
         return {
             "error": _("No provider or model configured"),
         }
+    
+    style_prompt = translator_settings.prompt
+    
+    SYSTEM_PROMPT = (
+        "You are a translator that translates text from "
+        f"{source_language} to {target_language}.\n"
+        "Keep the structure intact. Only translate the text.\n"
+        "Reply with just the translated text, HTML, or any other format without any wrapper or fence of any kind.\n"
+        "- Do not add any additional text or HTML\n"
+        "- Only inline HTML tags are allowed\n"
+        "- Keep all attributes of the tags when present\n"
+        "- If the text is slugified, keep it slugified"
+    )
+
+    if style_prompt:
+        SYSTEM_PROMPT += f"\n\n#Style Instructions  \n{style_prompt}"
+    
+    SYSTEM_PROMPT += f"\n\nTranslate the following text to {target_language}."
 
     messages = [
         {
             "role": "system",
-            "content": "You are a helpful assistant that translates text.",
+            "content": SYSTEM_PROMPT,
         },
-        {"role": "user", "content": prompt},
+        {"role": "user", "content": text.get_translatable_html()},
     ]
 
     provider_kwargs = {}
