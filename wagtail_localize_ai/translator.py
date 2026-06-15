@@ -104,7 +104,7 @@ def translate_text(text: StringValue, source_language: str, target_language: str
     try:
         client = get_llm_client(provider)
         response = client.completion(
-            model=normalize_model_identifier(provider, model),
+            model=model,
             temperature=0,
             messages=messages,
         )
