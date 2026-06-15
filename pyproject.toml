@@ -1,14 +1,14 @@
 [project]
 name = "wagtail-localize-ai"
-version = "0.2.0"
-description = "LiteLLM powered machine translator for wagtail-localize"
+version = "0.3.0"
+description = "Any-LLM powered machine translator for wagtail-localize"
 authors = [
     { name="Alessio Tognan", email="tognan@infofactory.it" },
 ]
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 dependencies = [
-    "litellm>=1.63.2,<2.0.0",
+    "any-llm-sdk",
     "wagtail-localize",
 ]
 

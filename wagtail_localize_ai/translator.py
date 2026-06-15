@@ -1,7 +1,5 @@
-from typing import List
 import concurrent
 from django.utils.translation import gettext_lazy as _, get_language_info
-from django.conf import settings
 
 from wagtail.models import Locale
 
@@ -9,12 +7,16 @@ from wagtail_localize.machine_translators.base import BaseMachineTranslator
 from wagtail_localize.strings import StringValue
 
 from wagtail_localize_ai.models import AITranslatorSettings, TranslationLog
-from litellm import completion
+from wagtail_localize_ai.utils import get_llm_client, get_provider_display_name, normalize_model_identifier
+
 
 class AITranslator(BaseMachineTranslator):
-    display_name = _("AI Translator")
+    @property
+    def display_name(self):
+        provider = AITranslatorSettings.load().provider
+        return get_provider_display_name(provider) if provider else _("AI Translator")
 
-    def translate(self, source_locale: Locale, target_locale: Locale, strings: List[StringValue]) -> List[StringValue]:
+    def translate(self, source_locale: Locale, target_locale: Locale, strings: list[StringValue]) -> list[StringValue]:
         source_language = get_language_info(source_locale.language_code)[
             "name"
         ]
@@ -99,40 +101,28 @@ def translate_text(text: StringValue, source_language: str, target_language: str
         {"role": "user", "content": text.get_translatable_html()},
     ]
 
-    provider_kwargs = {}
-
-    for key, value in settings.AI_PROVIDERS[provider].items():
-        # Skip all kwargs that start with an underscore
-        if key.startswith("_"):
-            continue
-        provider_kwargs[key] = value
-
     try:
-        response = completion(
-            model=f"{provider}/{model}",
+        client = get_llm_client(provider)
+        response = client.completion(
+            model=normalize_model_identifier(provider, model),
             temperature=0,
             messages=messages,
-            **provider_kwargs
         )
     except Exception as e:
         return {
             "error": str(e),
         }
-    
+
+    content = (response.choices[0].message.content or "").strip()
     usage = {
-        "input_tokens": response["usage"]["prompt_tokens"],
-        "output_tokens": response["usage"]["completion_tokens"],
+        "input_tokens": response.usage.prompt_tokens or 0,
+        "output_tokens": response.usage.completion_tokens or 0,
     }
 
-    if response["choices"][0]["message"]["content"].strip() == "":
-        return {
-            "error": _("Translation failed"),
-            "usage": usage
-        }
-    
+    if not content:
+        return {"error": _("Translation failed"), "usage": usage}
+
     return {
-        "result": {
-            text: StringValue.from_translated_html(response["choices"][0]["message"]["content"]),
-        },
+        "result": {text: StringValue.from_translated_html(content)},
         "usage": usage,
     }

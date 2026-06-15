@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.admin.panels import FieldPanel, FieldRowPanel
+
+from wagtail_localize_ai.utils import get_ai_providers, get_provider_display_name
 
 
 class TranslationLog(models.Model):
@@ -29,8 +30,8 @@ class TranslationLog(models.Model):
 
 def get_providers():
     return (
-        (provider_name, provider.get("_name", provider_name))
-        for provider_name, provider in settings.AI_PROVIDERS.items()
+        (provider_key, get_provider_display_name(provider_key))
+        for provider_key in get_ai_providers()
     )
 
 @register_setting(icon='site')
