@@ -8,7 +8,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "any-llm-sdk",
+    "any-llm-sdk>=1.28.0",
     "wagtail-localize",
 ]
 

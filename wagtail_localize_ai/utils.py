@@ -47,17 +47,12 @@ def get_provider_display_name(provider_key: str) -> str:
     return provider_key
 
 
-def normalize_model_identifier(provider_key: str, model: str) -> str:
-    """Normalizes model identifier to provider:model format expected by any-llm."""
-    provider = get_provider_name(provider_key)
-    if ":" in model:
-        return model
-    if "/" in model:
-        return model.replace("/", ":", 1)
-    return f"{provider}:{model}"
-
-
 def get_llm_client(provider_key: str):
     provider = get_provider_name(provider_key)
     provider_kwargs = get_provider_kwargs(provider_key, exclude_private=True)
     return AnyLLM.create(provider, **provider_kwargs)
+
+
+def provider_supports_reasoning(provider_key: str) -> bool:
+    provider = get_provider_name(provider_key)
+    return AnyLLM.get_provider_class(provider).get_provider_metadata().reasoning

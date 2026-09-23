@@ -7,7 +7,11 @@ from wagtail_localize.machine_translators.base import BaseMachineTranslator
 from wagtail_localize.strings import StringValue
 
 from wagtail_localize_ai.models import AITranslatorSettings, TranslationLog
-from wagtail_localize_ai.utils import get_llm_client, get_provider_display_name, normalize_model_identifier
+from wagtail_localize_ai.utils import (
+    get_llm_client,
+    get_provider_display_name,
+    provider_supports_reasoning,
+)
 
 
 class AITranslator(BaseMachineTranslator):
@@ -103,11 +107,16 @@ def translate_text(text: StringValue, source_language: str, target_language: str
 
     try:
         client = get_llm_client(provider)
-        response = client.completion(
-            model=model,
-            temperature=0,
-            messages=messages,
-        )
+        completion_kwargs = {
+            "model": model,
+            "messages": messages,
+        }
+        if provider_supports_reasoning(provider):
+            # any-llm maps "none" to thinking disabled, below the lowest enabled level.
+            completion_kwargs["reasoning_effort"] = "none"
+        else:
+            completion_kwargs["temperature"] = 0.01
+        response = client.completion(**completion_kwargs)
     except Exception as e:
         return {
             "error": str(e),
